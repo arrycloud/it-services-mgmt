@@ -1,0 +1,51 @@
+ERROR / ISSUE:
+
+DEV@DESKTOP-L2GF75I MINGW64 ~/music/it-services-mgmt (main) $ git push -u origin main remote: Permission to arrycloud/it-services-mgmt.git denied to Ganiyu-arigbabu. fatal: unable to access 'https://github.com/arrycloud/it-services-mgmt.git/': The requested URL returned error: 403 DEV@DESKTOP-L2GF75I MINGW64 ~/music/it-services-mgmt (main)
+
+
+FIX TROUBLESHOOTING:
+
+Ah — now it’s clear. This is why every push to arrycloud/it-services-mgmt is failing.
+
+Important fact: You cannot push to a GitHub repository owned by someone else unless the owner explicitly grants you write access. That’s what’s causing the 403 Permission denied error.
+
+✅ What you need to do
+Option 1: Get collaborator access (required for arrycloud repo)
+
+Ask the repo owner (arrycloud) to add you as a collaborator.
+
+Go to the repo → Settings → Collaborators & teams → Add people
+
+Add your GitHub username: Ganiyu-arigbabu
+
+Give Write access (so you can push)
+
+Accept the invitation (you’ll get a notification/email from GitHub).
+
+After this, you will be able to push:
+
+git push -u origin main
+
+Option 2: Fork the repo (if owner won’t add you)
+
+Go to the arrycloud/it-services-mgmt repo on GitHub.
+
+Click Fork → your account (Ganiyu-arigbabu).
+
+Push your local project to your fork:
+
+git remote set-url origin https://github.com/Ganiyu-arigbabu/it-services-mgmt.git
+git push -u origin main
+
+
+To propose changes to arrycloud, open a Pull Request from your fork.
+
+⚠️ Key point
+
+You cannot push directly to arrycloud repo without being added as a collaborator.
+
+Trying repeatedly will always give 403 errors.
+
+If you want, I can give you exact Git commands to push to your fork or prepare everything so that once arrycloud adds you as a collaborator, you can push immediately.
+
+Do you want to go the fork route or wait for collaborator access?
