@@ -1,0 +1,62 @@
+stages:
+  - build-frontend
+  - build-backend
+  - test
+  - deploy-staging
+  - deploy-production
+
+variables:
+  DOCKER_DRIVER: overlay2
+  FRONTEND_IMAGE: $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_REF_SLUG
+  BACKEND_IMAGE: $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_REF_SLUG
+
+services:
+  - docker:dind
+
+build-frontend:
+  stage: build-frontend
+  image: docker:latest
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $FRONTEND_IMAGE ./frontend
+    - docker push $FRONTEND_IMAGE
+
+build-backend:
+  stage: build-backend
+  image: docker:latest
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $BACKEND_IMAGE ./backend
+    - docker push $BACKEND_IMAGE
+
+test-backend:
+  stage: test
+  image: node:18-slim
+  script:
+    - cd backend
+    - npm install
+    - npm test
+
+deploy-staging:
+  stage: deploy-staging
+  image: alpine:latest
+  script:
+    - echo "Deploying to staging server..."
+    - echo "Pulling images: $FRONTEND_IMAGE and $BACKEND_IMAGE"
+    # In a real scenario, you would use ssh to run docker-compose on your server
+  environment:
+    name: staging
+  only:
+    - develop
+
+deploy-production:
+  stage: deploy-production
+  image: alpine:latest
+  script:
+    - echo "Deploying to production server..."
+    - echo "Pulling images: $FRONTEND_IMAGE and $BACKEND_IMAGE"
+  environment:
+    name: production
+  only:
+    - main
+  when: manual

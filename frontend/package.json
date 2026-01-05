@@ -1,0 +1,9 @@
+{
+  "name": "it-services-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for IT Services Management System",
+  "scripts": {
+    "start": "npx serve -s .",
+    "test": "echo \"No tests\" && exit 0"
+  }
+}

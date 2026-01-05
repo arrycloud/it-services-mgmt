@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITSM Pro | Enterprise Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">ITSM<span>Pro</span></div>
+        <nav>
+            <a href="#" class="active" data-page="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="#" data-page="services"><i class="fas fa-concierge-bell"></i> Services</a>
+            <a href="#" data-page="clients"><i class="fas fa-users"></i> Clients</a>
+            <a href="#" data-page="bookings"><i class="fas fa-calendar-alt"></i> Bookings</a>
+            <a href="#" data-page="analytics"><i class="fas fa-chart-pie"></i> Analytics</a>
+        </nav>
+    </div>
+
+    <main class="content">
+        <header>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search services, clients...">
+            </div>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Admin+User" alt="Profile">
+                <span>Admin User</span>
+            </div>
+        </header>
+
+        <div id="page-content">
+            <!-- Dynamic Content Loaded Here -->
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
